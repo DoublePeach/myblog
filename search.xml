@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>电商项目经验杂记1</title>
+      <link href="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/"/>
+      <url>/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1、使用逆向工程生成实体类和Mapper"><a href="#1、使用逆向工程生成实体类和Mapper" class="headerlink" title="1、使用逆向工程生成实体类和Mapper"></a>1、使用逆向工程生成实体类和Mapper</h1><p>本机逆向工程代码实例位置：E:\devTools\maven-tools\逆向工程实例代码\mybatis-generator</p><h2 id="逆向工程生成的类中有很多的注释，批量删除注释的方法："><a href="#逆向工程生成的类中有很多的注释，批量删除注释的方法：" class="headerlink" title="逆向工程生成的类中有很多的注释，批量删除注释的方法："></a>逆向工程生成的类中有很多的注释，批量删除注释的方法：</h2><p>**ctrl + R 正则表达式匹配： **</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/|[ \t]*//.*)</span><br></pre></td></tr></table></figure><h2 id="2、单元测试写法："><a href="#2、单元测试写法：" class="headerlink" title="2、单元测试写法："></a>2、单元测试写法：</h2><p>单元测试时，自定义的测试类要这么写：</p><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/e8f14b5f9664ae51a9972bc6f1f4f991.png" class><h1 id="3、Service层处理业务逻辑功能更清晰"><a href="#3、Service层处理业务逻辑功能更清晰" class="headerlink" title="3、Service层处理业务逻辑功能更清晰"></a>3、Service层处理业务逻辑功能更清晰</h1><p>例如：service层下有异常处理包，有service接口，有接口的实现类impl包</p><p><strong>快捷键：ctrl + alt + t 对选中的代码块进行环绕，例如 if 、while 、for 、try等等</strong></p><h1 id="4、service中的注册功能进行密码加密："><a href="#4、service中的注册功能进行密码加密：" class="headerlink" title="4、service中的注册功能进行密码加密："></a>4、service中的注册功能进行密码加密：</h1><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/728bc69fd4c4d0a9b285a2109410fc4b.png" class><p><strong>盐值若不记录在数据库的话，会导致登录功能有误</strong></p><h2 id="外部定义一个调md5加密算法的方法："><a href="#外部定义一个调md5加密算法的方法：" class="headerlink" title="外部定义一个调md5加密算法的方法："></a>外部定义一个调md5加密算法的方法：</h2><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/e5fd33aa360e962863620c416b2ad366.png" class><h1 id="5、控制层封装响应结果集对象"><a href="#5、控制层封装响应结果集对象" class="headerlink" title="5、控制层封装响应结果集对象"></a>5、控制层封装响应结果集对象</h1><p>当中要包含状态码、描述信息、带泛型<E>的数据，以此对象返回前端</E></p><p>其中描述信息中，要将捕获的异常赋值进去，这样前端就能显示后台出了什么问题</p><h1 id="6、Controller层定义用于统一异常处理的基类BaseController"><a href="#6、Controller层定义用于统一异常处理的基类BaseController" class="headerlink" title="6、Controller层定义用于统一异常处理的基类BaseController"></a>6、Controller层定义用于统一异常处理的基类BaseController</h1><h2 id="使用-ExceptionHandler-要拦截的异常类-class-注解进行异常统一拦截处理"><a href="#使用-ExceptionHandler-要拦截的异常类-class-注解进行异常统一拦截处理" class="headerlink" title="使用@ExceptionHandler(要拦截的异常类.class) 注解进行异常统一拦截处理"></a>使用@ExceptionHandler(要拦截的异常类.class) 注解进行异常统一拦截处理</h2><p>@ExceptionHandler注解用于统一处理方法抛出的异常。当我们使用这个注解时，需要定义一个 异常的处理方法，再给这个方法加上@ExceptionHandler注解，这个方法就会处理类中其他方法 （被@RequestMapping注解）抛出的异常。@ExceptionHandler注解中可以添加参数，参数是某 个异常类的class，代表这个方法专门处理该类异常。</p><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/3fe7d2f8eb6705af4c72ad126baed260.png" class><p>又回顾了一遍ajax局部刷新向后台发送请求的流程，学习了一个新的传递参数的方式：<br>使用Ajax传递参数的时候，可以<strong>用serialize直接获取被选择的表单内所有参数值</strong>，<br>一起传值给后端，后端使用的springboot的话可以自动装配参数</p><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/f427b05692ec3eee67addade1437413c.png" class><br><br><h1 id="7、使用会话Session的收获"><a href="#7、使用会话Session的收获" class="headerlink" title="7、使用会话Session的收获"></a>7、使用会话Session的收获</h1><p>用session进行登录功能时，将获取session的对象封装到了controller层的基类中 (controller层中所有的controller都继承这个基类)</p><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/20c16830a5ec1b0cd94b2679b63997d4.png" class><br><h1 id="8、使用框架中的拦截器HandlerInterceptor："><a href="#8、使用框架中的拦截器HandlerInterceptor：" class="headerlink" title="8、使用框架中的拦截器HandlerInterceptor："></a>8、使用框架中的拦截器HandlerInterceptor：</h1><p>在访问某些页面时拦截未登录的用户，有三个方法，一般只用preHandle()方法</p><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/becdb303c1ce55da76fcd27c98c3989a.png" class><p>有拦截器还不够，因为有些页面，用户未登录也可以访问，不能全部拦截<br><strong>所以需要使用servlet中的过滤器来指定白名单(未登录可以访问的url)和黑名单(未登录不能访问的url)</strong></p><br><h1 id="9、servlet中的过滤器："><a href="#9、servlet中的过滤器：" class="headerlink" title="9、servlet中的过滤器："></a>9、servlet中的过滤器：</h1><img src="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/6480410e873ed7aeec97599cb353c1e7.png" class><br><br>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux+nginx部署静态网站步骤以及访问nginx遇到的问题解决</title>
       <link href="/2022/08/28/Linux-nginx%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E6%AD%A5%E9%AA%A4%E4%BB%A5%E5%8F%8A%E8%AE%BF%E9%97%AEnginx%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
       <url>/2022/08/28/Linux-nginx%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E6%AD%A5%E9%AA%A4%E4%BB%A5%E5%8F%8A%E8%AE%BF%E9%97%AEnginx%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>

@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>电商项目经验杂记3</title>
+      <link href="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/"/>
+      <url>/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第一小点：​"><a href="#第一小点：​" class="headerlink" title="第一小点：​"></a>第一小点：​</h1><p>在springboot配置文件中自定义配置项，并注入到类中的属性中：<br>application.yml中自定义配置：</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/3e894166f8262142afe0d8f83fd27bbd.png" class><p>注意：这里可能会报黄以及无法点击跳转，但可以注入我们可以不用管<br>类中的属性上添加注解：</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/d7b8f21b1159370b90e78912ff1c6679.png" class><p>这样就完成了自定义配置项对项目解耦合</p><p>*记录：2022年9月2日01点55分</p><h1 id="第二小点"><a href="#第二小点" class="headerlink" title="第二小点"></a>第二小点</h1><p>【完成项目的新增收货地址功能中的获取用户输入的省市区数据，至此数据库该表中所有的字段都补全完毕】</p><p>控制器接收前端参数使用url的方式：<br>@PathVariable注解用于接收url中的参数，该参数必须在{}中</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/de65eb29079cf23fbc173490cc2c81f4.png" class>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>电商项目经验杂记2</title>
+      <link href="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/"/>
+      <url>/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-前端接收后端返回数据时的问题"><a href="#1-前端接收后端返回数据时的问题" class="headerlink" title="1.前端接收后端返回数据时的问题"></a>1.前端接收后端返回数据时的问题</h1><p>在写用户信息加载的时候，前端ajax请求成功发到后端，也成功返回了json格式的字符串，但取json中的属性值就是不成功。<br>最后发现，success中的回调函数的参数不能直接为data，然后data.username，而是json.data.username</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/47f83e75b8c568e7a243d56c0784e1e1.png" class><p><strong>这里有个前端小知识点：设置单选框radio是否选中要用prop函数，即：选择器.prop(‘checked’,true)</strong></p><h1 id="2-在做头像上传业务功能时的一些收获"><a href="#2-在做头像上传业务功能时的一些收获" class="headerlink" title="2.在做头像上传业务功能时的一些收获"></a>2.在做头像上传业务功能时的一些收获</h1><p>（这个因为没接触过，所以记了挺多东西）</p><ul><li>文件上传的文件处理以及异常规划类都写在控制层内，因为带有文件数据包，层与层之间传递包影响效率<br>文件上传时，使用SpringMVC中提供的MultipartFile接口作为控制器的参数，接收前端发来的文件内的数据包\</li></ul><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/37d01d1ea6666d996670690cbb0a791c.png" class><p>前端页面这里采用form表单进行提交，必须要填enctype属性</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/809ce5bdd433e7623ad9b18f11757835.png" class><ul><li>上传头像时，当上传的头像大于设定的10MB时，不按预期抛出自定义异常，而是抛出了tomcat的FileSize异常<br>问题的根源：tomcat默认设置能接收HTTP POST请求的大小最大为2M,如果你的POST请求传递的数据大于2M,就会报错误。<br>解决的办法：修改tomcat的配置文件C:&#x2F;MinyooCMS&#x2F;tomcat&#x2F;conf&#x2F;server.xml(或者安装在D盘文件路径是D: &#x2F;MinyooCMS&#x2F;tomcat&#x2F;conf&#x2F;server.xml),找到里面的<Connector>标签,在该标签中添 加”maxPostSize”属性,将该属性值设置成你想要的最大值,单位是字节,或者把这个值设置为 0(maxPostSize&#x3D;”0”),tomcat将不再检查POST的大小。即可解决上述问题。<br>springboot的项目使用的都是内嵌的Tomcat服务器，因此不好按上述修改配置文件。<br>可以在springboot的主配置文件中声明最大文件设置：</Connector></li></ul><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/b02471469f9ac3eb22ede96f4a0a9d9f.png" class><ul><li><p>修改头像向后端传输的是文件，而serio()只能用来传递字符串等类型的表单参数，<br>所以这里data属性因使用js中的FormData对象来封装并传递文件数据，并且要设置processData和contentType属性，如下：</p><img src="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B02/1c8f471e978eab22096dc89fc41fe80c.png" class></li><li><p>最后在前端页面中使用了cookie技术，将上传的头像保存在cookie中，并设置过期时间为7天<br>这样在有效期内每次需要展示用户头像的时候，都不需要再查数据库，而是直接从cookie中取即可</p></li></ul><p>对应的实现代码在本机的：E:\src_htt\Spring\projects\computer_store\src\main\resources\static\web\upload.html 中</p><ul><li>这个头像上传还可以做优化，比如Controller层可以简化，把业务逻辑和异常处理都放在业务层<br>（不过在控制层也有好处就是减少数据传输造成性能损失）</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 项目 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>电商项目经验杂记1</title>
       <link href="/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/"/>
       <url>/2022/09/15/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B01/</url>

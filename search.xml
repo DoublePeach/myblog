@@ -54,6 +54,31 @@
     
     
     <entry>
+      <title>随笔2022-11-25</title>
+      <link href="/2022/10/15/%E9%9A%8F%E7%AC%942022-11-25/"/>
+      <url>/2022/10/15/%E9%9A%8F%E7%AC%942022-11-25/</url>
+      
+        <content type="html"><![CDATA[<p>   好久不写博客了，今天更一篇我最近很郁闷的一件事，最近在学习各种分布式框架技术，都要用到<strong>VMware虚拟机中的CentOS7系统环境进行操作</strong>。但是频繁的出现bug让我难受的一批。</p><p>目前为止，我已经卸载重新安装了两次CentOS7系统了。</p><p><strong>第一次</strong>好像在十月末，那次是因为Linux虚拟主机的IP地址频繁自动更换，虽然后面通过网上的方式将虚拟主机IP更改为静态地址，但是在使用XShell进行连接的时候经常连接不上，<strong>反复确认了em33的IP无误，端口号也试过很多，但还是连接不上</strong>，非常的郁闷啊谁懂~</p><p>   然后我在想是不是之前设置了一些东西搞坏了配置的原因，所以我就把挂载的CentOS卸载了，重新安装了一次。<strong>安装好系统之后的第一件事情就是在配置文件中配置静态地址</strong>（被动态IP消耗了太多时间了-麻了…）</p><p>编辑em33网关配置文件的命令：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-ens33</span><br></pre></td></tr></table></figure><p><strong>将动态IP更改为static静态地址，即将BOOTPROTO&#x3D;”static”，并且指定了IPADDR&#x3D;”192.168.195.128”</strong></p><p>   然后就大功告成了，<strong>又可以正常通过终端连接和操作虚拟主机，迎来了一个多月的安稳学习时间</strong>，但是天有不测风云啊…就在我以为一劳永逸的时候，现实又给了我狠狠一暴击…</p><br><p>   <strong>第二次</strong>是让我最郁闷的一次，也是最近我最烦心的，前前后后消耗了我大量的时间和精力…最后还没解决，只能再次重装虚拟机</p><p>   那天我高高兴兴的打开电脑、启动VM、启动CentOS、开启XShell、连接虚拟主机，嗯~非常顺利-非常丝滑，<strong>但当我开始使用docker进行pull资源时，一直报mirror问题</strong>，拉不下来。</p><p>   我一看觉得应该是<strong>配置镜像加速器</strong>的问题导致的，然后我就重新按部就班的配置了一遍阿里云镜像加速器，没想到还是报超时错误，我百思不得其解。</p><p>   后面网上debug的时候说是<strong>DNS解析问题</strong>，我又按照网上的方式进行dns配置，修改了好多东西，期间使用yum命令获取一些必要的东西时发现，<strong>yum命令也不能使用</strong>，阿西吧郁闷，我又去整yum的问题，卸载了yum，<strong>重装yum源的时候，需要用wget命令进行yum源的配置</strong>，但让我又又又郁闷了，<strong>wget命令也使用不了</strong>，报错：</p><p><code>wget: unable to resolve host address ‘tel.mirrors.163.com’</code></p><p>   啊！！！兜兜转转还是<strong>网络服务的问题</strong>啊，ping <a href="http://www.baidu.com发现确实我的虚拟主机现在连网络都跑不通,以我的直觉来说,应该又是什么东西自动修改了,就跟第一次重装时ip自动变化一样,我只能想到应该是dns,但是按照网上的方式修改了好久还是那样...那我心想,**会不会是我之前修改的一些配置导致的**.../">www.baidu.com发现确实我的虚拟主机现在连网络都跑不通，以我的直觉来说，应该又是什么东西自动修改了，就跟第一次重装时IP自动变化一样，我只能想到应该是DNS，但是按照网上的方式修改了好久还是那样。。。那我心想，**会不会是我之前修改的一些配置导致的**。。。</a></p><p>此时已经前前后后折磨了我快一个星期了，导致学习卡顿，天天打开电脑就是处理这玩意儿。。。第二天，<strong>果断卸载重装虚拟机</strong>，希望不会有这种事情发生了！保佑保佑保佑！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>电商项目经验杂记3</title>
       <link href="/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/"/>
       <url>/2022/09/20/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C%E6%9D%82%E8%AE%B03/</url>

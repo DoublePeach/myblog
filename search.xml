@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>SpringBoot项目中静态资源访问的处理</title>
+      <link href="/2022/12/09/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E7%9A%84%E5%A4%84%E7%90%86/"/>
+      <url>/2022/12/09/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E7%9A%84%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1、问题："><a href="#1、问题：" class="headerlink" title="1、问题："></a>1、问题：</h2><p>使用SpringBoot项目写一个文件上传的需求，发现在项目启动后无法直接访问resources&#x2F;templates下的静态资源页面（html页面）。</p><h2 id="2、问题原因："><a href="#2、问题原因：" class="headerlink" title="2、问题原因："></a>2、问题原因：</h2><p>SpringBoot项目中<strong>resources&#x2F;templates下的静态资源是不能直接访问的</strong>，原因是没有开放访问权限的，因为templates下可能存放有后台管理的页面资源，当templates对外开放就会产生安全隐患，所以templates下的资源需要通过<strong>ViewResolver(视图解析器)去解析访问</strong>，大体流程：<strong>前端request请求-&gt;DispatcherServlet（前端控制器）-&gt; Controller层的跳转方法 -&gt; ViewResslver（视图解析器）-&gt;templates下的静态资源</strong>（SpringMVC的工作流程）。</p><h2 id="3、解决办法："><a href="#3、解决办法：" class="headerlink" title="3、解决办法："></a>3、解决办法：</h2><p><strong>通过访问Controller层方法跳转到需要访问的静态资源</strong></p><h2 id="4、注意："><a href="#4、注意：" class="headerlink" title="4、注意："></a>4、注意：</h2><p>1、这里需要<strong>使用@Controller</strong>，不能使用RestController，不然会以Json格式响应到页面，不会进行视图解析。以下是正常的访问方式：</p><img src="/2022/12/09/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E7%9A%84%E5%A4%84%E7%90%86/771a2af43ba4e043fdb00f4c4d43b076.png" class><img src="/2022/12/09/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E7%9A%84%E5%A4%84%E7%90%86/3ae2a5f42a73f6bc17c6624b6a9fa509.png" class><p><strong>如果通过Controller层方法还是不能跳转成功并且显示：</strong></p><img src="/2022/12/09/SpringBoot%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E7%9A%84%E5%A4%84%E7%90%86/3ba3ee48e47b7c1a56c1529ae3a8cde7.png" class><p><strong>原因可能是没有添加模板引擎</strong>，SpringBoot访问静态资源只支持静态模板引擎（SpringBoot默认不支持jsp作为视图），所以这里我添加了thymeleaf：<br><br></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><p>再通过控制层url访问时就成功了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 项目 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SpringBoot </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>随笔2022-11-25</title>
       <link href="/2022/11/25/%E9%9A%8F%E7%AC%942022-11-25/"/>
       <url>/2022/11/25/%E9%9A%8F%E7%AC%942022-11-25/</url>
